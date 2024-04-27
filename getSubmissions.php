@@ -78,8 +78,8 @@
         <thead>
             <tr>
                 <th>Student</th>
-                <th>Submission Date</th>
                 <th>Attempt</th>
+                <th>Submission Date</th>
                 <th>Submission File</th>
                 <th>Actions</th>
             </tr>

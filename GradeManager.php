@@ -14,16 +14,20 @@ class GradeManager {
         $stmt = $this->conn->prepare($insertGradeQuery);
         $stmt->bind_param("iiis", $userId, $courseId, $grade, $comment);
 
-        $success = $stmt->execute();
-        $stmt->close();
+        if ($stmt->execute()) {
+            $_SESSION['success_message'] = 'Grade added successfully.';
+            return true;
+        } else {
+            $_SESSION['error_message'] = 'Error adding grade: ' . $this->conn->error;
+            return false;
+        }
 
-        return $success;
+        $stmt->close();
     }
 }
 
-// Check if request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = new GradeManager($conn);
+    $gradeManagement = new GradeManagement($conn);
 
     // Retrieve data from the POST request
     $userId = $_POST['userID'];
@@ -31,10 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $grade = $_POST['grade'];
     $comment = $_POST['comment'];
 
-   
-
-    // Add grade using the GradeManager class
-    $response = $db->addGrade($userId, $courseId, $grade, $comment);
+    // Call the addGrade method of the GradeManagement class
+    if ($gradeManagement->addGrade($userId, $courseId, $grade, $comment)) {
+        $response = ['success' => true, 'message' => 'Grade added successfully.'];
+    } else {
+        $response = ['success' => false, 'message' => 'Error adding grade.'];
+    }
 
     // Return JSON response to the JavaScript
     header('Content-Type: application/json');

@@ -1,0 +1,18 @@
+{
+    "name": "debian/prototype_v1",
+    "autoload": {
+        "psr-4": {
+            "Debian\\PrototypeV1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "atiangogwel",
+            "email": "Bogwel@regis.edu"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.1"
+        
+    }
+}

@@ -6,7 +6,7 @@ error_reporting(E_ERROR | E_PARSE);
 $servername = "localhost";
 $username = "root";
 $password = "pass123";
-$database = "LLM";
+$database = "pos";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
